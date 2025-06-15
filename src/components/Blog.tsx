@@ -34,6 +34,15 @@ export default function Blog() {
     },
   ]
 
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString)
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+  }
+
   return (
     <section id="blog" className="py-20 bg-gray-50 dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -65,11 +74,7 @@ export default function Blog() {
               <div className="p-6">
                 <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
                   <Calendar className="w-4 h-4 mr-2" />
-                  {new Date(post.date).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
+                  {formatDate(post.date)}
                   <Clock className="w-4 h-4 ml-4 mr-2" />
                   {post.readTime}
                 </div>

@@ -1,84 +1,112 @@
+"use client"
+
+import { motion } from "framer-motion"
 import { Award, Star, Users, Code } from "lucide-react"
+import { achievementsData } from "../data/achievements"
 
-export default function Achievements() {
-  const achievements = [
-    {
-      icon: <Award className="w-8 h-8" />,
-      title: "AWS Certified Solutions Architect",
-      description: "Professional level certification in cloud architecture and deployment.",
-      date: "2024",
-    },
-    {
-      icon: <Star className="w-8 h-8" />,
-      title: "Open Source Contributor",
-      description: "500+ contributions to various open-source projects on GitHub.",
-      date: "2023-2024",
-    },
-    {
-      icon: <Users className="w-8 h-8" />,
-      title: "Tech Conference Speaker",
-      description: 'Presented on "AI in Modern Web Development" at DevCon 2024.',
-      date: "2024",
-    },
-    {
-      icon: <Code className="w-8 h-8" />,
-      title: "Hackathon Winner",
-      description: "First place in AI/ML category at TechHack 2023.",
-      date: "2023",
-    },
-  ]
-
+const Achievements = () => {
   const stats = [
-    { number: "50+", label: "Projects Completed" },
-    { number: "3+", label: "Years Experience" },
-    { number: "500+", label: "GitHub Contributions" },
-    { number: "10+", label: "Technologies Mastered" },
+    { icon: Code, label: "Projects Completed", value: "50+" },
+    { icon: Star, label: "Problems solved in 2024", value: "3025" },
+    { icon: Users, label: "Hackathons", value: "6+" },
+    { icon: Award, label: "Certifications", value: "40+" },
   ]
 
   return (
-    <section id="achievements" className="py-20 bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-            Achievements & Recognition
+    <section id="achievements" className="py-16 lg:py-32 section-padding section-bg-gradient">
+      <div className="container-width relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12 lg:mb-16"
+        >
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+            Achievements & <span className="text-gradient">Recognition</span>
           </h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto mb-8"></div>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Milestones and recognitions that reflect my commitment to excellence and continuous growth.
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto px-4 lg:px-0">
+            Milestones and recognitions that mark my journey in tech
           </p>
-        </div>
+        </motion.div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+        {/* Stats Grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 xl:gap-10 mb-12 lg:mb-16"
+        >
           {stats.map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="text-4xl sm:text-5xl font-bold text-blue-600 dark:text-blue-400 mb-2">{stat.number}</div>
-              <div className="text-gray-600 dark:text-gray-300 font-medium">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* Achievements */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {achievements.map((achievement, index) => (
-            <div
-              key={index}
-              className="flex items-start space-x-4 p-6 bg-gray-50 dark:bg-gray-800 rounded-2xl hover:shadow-lg transition-shadow duration-300"
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="text-center card-swiss card-gradient p-4 lg:p-6"
             >
-              <div className="flex-shrink-0 p-3 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl">
-                {achievement.icon}
-              </div>
-              <div className="flex-grow">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{achievement.title}</h3>
-                  <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">{achievement.date}</span>
+              <div className="relative z-10">
+                <div className="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-3 lg:mb-4">
+                  <stat.icon className="w-6 h-6 lg:w-8 lg:h-8 text-white" />
                 </div>
-                <p className="text-gray-600 dark:text-gray-300">{achievement.description}</p>
+                <div className="text-2xl lg:text-3xl font-bold text-gradient mb-1 lg:mb-2">{stat.value}</div>
+                <div className="text-gray-600 dark:text-gray-400 font-medium text-sm lg:text-base">{stat.label}</div>
               </div>
-            </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Achievements Timeline */}
+        <div className="space-y-6 lg:space-y-8">
+          {achievementsData.map((achievement, index) => (
+            <motion.div
+              key={achievement.id}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className={`flex items-center gap-4 lg:gap-8 ${index % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}
+            >
+              {/* Timeline Dot */}
+              <div className="flex-shrink-0 w-4 h-4 bg-primary-500 rounded-full relative">
+                <div className="absolute inset-0 bg-primary-500 rounded-full animate-ping opacity-75"></div>
+              </div>
+
+              {/* Achievement Card */}
+              <motion.div whileHover={{ scale: 1.02 }} className="flex-1 card-swiss card-gradient p-4 lg:p-6 max-w-2xl">
+                <div className="relative z-10">
+                  <div className="flex items-start gap-3 lg:gap-4">
+                    <div className="flex-shrink-0 w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                      <Award className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
+                    </div>
+
+                    <div className="flex-1">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 lg:gap-3 mb-2">
+                        <h3 className="text-base lg:text-lg font-bold">{achievement.title}</h3>
+                        <span className="text-xs lg:text-sm text-gray-500 dark:text-gray-400">{achievement.date}</span>
+                      </div>
+
+                      <p className="text-gray-600 dark:text-gray-400 mb-2 lg:mb-3 text-sm lg:text-base">
+                        {achievement.description}
+                      </p>
+
+                      {achievement.organization && (
+                        <div className="text-xs lg:text-sm font-medium text-primary-500">
+                          {achievement.organization}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
   )
 }
+
+export default Achievements

@@ -1,104 +1,103 @@
-import { Calendar, ArrowRight, Clock } from "lucide-react"
+// "use client"
 
-export default function Blog() {
-  const posts = [
-    {
-      id: 1,
-      title: "Building Scalable React Applications with TypeScript",
-      excerpt:
-        "Learn best practices for structuring large-scale React applications with TypeScript for better maintainability and developer experience.",
-      date: "2024-01-15",
-      readTime: "8 min read",
-      category: "React",
-      image: "/placeholder.svg?height=200&width=300",
-    },
-    {
-      id: 2,
-      title: "The Future of AI in Web Development",
-      excerpt:
-        "Exploring how artificial intelligence is transforming the way we build web applications and what developers need to know.",
-      date: "2024-01-10",
-      readTime: "12 min read",
-      category: "AI",
-      image: "/placeholder.svg?height=200&width=300",
-    },
-    {
-      id: 3,
-      title: "Optimizing Node.js Performance for Production",
-      excerpt:
-        "Practical tips and techniques for improving Node.js application performance in production environments.",
-      date: "2024-01-05",
-      readTime: "10 min read",
-      category: "Backend",
-      image: "/placeholder.svg?height=200&width=300",
-    },
-  ]
+// import { motion } from "framer-motion"
+// import { Calendar, Clock, ArrowRight } from "lucide-react"
+// import { blogData } from "../data/blog"
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    })
-  }
+// const Blog = () => {
+//   return (
+//     <section id="blog" className="py-16 lg:py-32 section-padding">
+//       <div className="container-width">
+//         <motion.div
+//           initial={{ opacity: 0, y: 20 }}
+//           whileInView={{ opacity: 1, y: 0 }}
+//           viewport={{ once: true }}
+//           transition={{ duration: 0.6 }}
+//           className="text-center mb-12 lg:mb-16"
+//         >
+//           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+//             Latest <span className="text-gradient">Insights</span>
+//           </h2>
+//           <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto px-4 lg:px-0">
+//             Thoughts on technology, development, and the future of AI
+//           </p>
+//         </motion.div>
 
-  return (
-    <section id="blog" className="py-20 bg-gray-50 dark:bg-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">Latest Insights</h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto mb-8"></div>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Sharing knowledge and insights about web development, AI, and technology trends.
-          </p>
-        </div>
+//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 xl:gap-10">
+//           {blogData.map((post, index) => (
+//             <motion.article
+//               key={post.id}
+//               initial={{ opacity: 0, y: 20 }}
+//               whileInView={{ opacity: 1, y: 0 }}
+//               viewport={{ once: true }}
+//               transition={{ duration: 0.6, delay: index * 0.1 }}
+//               whileHover={{ y: -8 }}
+//               className="card-swiss card-gradient overflow-hidden group cursor-pointer"
+//             >
+//               <div className="relative z-10">
+//                 {/* Featured Image with gradient overlay */}
+//                 <div className="relative overflow-hidden">
+//                   <img
+//                     src={post.image || "/placeholder.svg"}
+//                     alt={post.title}
+//                     className="w-full h-40 sm:h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+//                   />
+//                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+//                   <div className="absolute top-3 lg:top-4 left-3 lg:left-4">
+//                     <span className="px-2 lg:px-3 py-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs rounded-full font-medium shadow-lg">
+//                       {post.category}
+//                     </span>
+//                   </div>
+//                 </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post) => (
-            <article
-              key={post.id}
-              className="bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
-            >
-              <div className="relative overflow-hidden">
-                <img
-                  src={post.image || "/placeholder.svg"}
-                  alt={post.title}
-                  className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110"
-                />
-                <div className="absolute top-4 left-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                  {post.category}
-                </div>
-              </div>
+//                 {/* Content */}
+//                 <div className="p-4 lg:p-6">
+//                   <div className="flex items-center gap-3 lg:gap-4 text-xs lg:text-sm text-gray-500 dark:text-gray-400 mb-3">
+//                     <div className="flex items-center gap-1">
+//                       <Calendar size={12} className="lg:w-4 lg:h-4" />
+//                       <span>{post.date}</span>
+//                     </div>
+//                     <div className="flex items-center gap-1">
+//                       <Clock size={12} className="lg:w-4 lg:h-4" />
+//                       <span>{post.readTime}</span>
+//                     </div>
+//                   </div>
 
-              <div className="p-6">
-                <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  {formatDate(post.date)}
-                  <Clock className="w-4 h-4 ml-4 mr-2" />
-                  {post.readTime}
-                </div>
+//                   <h3 className="text-lg lg:text-xl font-bold mb-2 lg:mb-3 group-hover:text-primary-500 transition-colors duration-300">
+//                     {post.title}
+//                   </h3>
 
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2">{post.title}</h3>
+//                   <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-3 lg:mb-4">
+//                     {post.excerpt}
+//                   </p>
 
-                <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">{post.excerpt}</p>
+//                   <div className="flex items-center gap-2 text-primary-500 font-medium text-sm group-hover:gap-3 transition-all duration-300">
+//                     <span>Read More</span>
+//                     <ArrowRight size={14} />
+//                   </div>
+//                 </div>
+//               </div>
+//             </motion.article>
+//           ))}
+//         </div>
 
-                <button className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors duration-200">
-                  Read More
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </button>
-              </div>
-            </article>
-          ))}
-        </div>
+//         {/* View All Button */}
+//         <motion.div
+//           initial={{ opacity: 0, y: 20 }}
+//           whileInView={{ opacity: 1, y: 0 }}
+//           viewport={{ once: true }}
+//           transition={{ duration: 0.6, delay: 0.4 }}
+//           className="text-center mt-8 lg:mt-12"
+//         >
+//           <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="btn-secondary">
+//             <div>
+//               <span>View All Articles</span>
+//             </div>
+//           </motion.button>
+//         </motion.div>
+//       </div>
+//     </section>
+//   )
+// }
 
-        <div className="text-center mt-12">
-          <button className="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-            View All Posts
-            <ArrowRight className="ml-2" size={20} />
-          </button>
-        </div>
-      </div>
-    </section>
-  )
-}
+// export default Blog

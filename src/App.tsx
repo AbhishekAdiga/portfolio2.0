@@ -1,50 +1,49 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
 import About from "./components/About"
 import Projects from "./components/Projects"
 import Achievements from "./components/Achievements"
-import Blog from "./components/Blog"
+//import Blog from "./components/Blog"
 import Contact from "./components/Contact"
 import Footer from "./components/Footer"
-import { ThemeProvider } from "./contexts/ThemeContext"
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true)
+  const [darkMode, setDarkMode] = useState(false)
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 1000)
-
-    return () => clearTimeout(timer)
+    const isDark = localStorage.getItem("darkMode") === "true"
+    setDarkMode(isDark)
+    document.documentElement.classList.toggle("dark", isDark)
   }, [])
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
-    )
+  const toggleDarkMode = () => {
+    const newDarkMode = !darkMode
+    setDarkMode(newDarkMode)
+    localStorage.setItem("darkMode", newDarkMode.toString())
+    document.documentElement.classList.toggle("dark", newDarkMode)
   }
 
   return (
-    <ThemeProvider>
-      <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
-        <Navbar />
-        <main>
-          <Hero />
-          <About />
-          <Projects />
-          <Achievements />
-          <Blog />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
-    </ThemeProvider>
+    <div
+      className={`min-h-screen bg-white dark:bg-dark-900 text-dark-900 dark:text-white transition-colors duration-300`}
+    >
+      <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+
+      <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+        <Hero />
+        <About />
+        <Projects />
+        <Achievements />
+        {/* <Blog /> */}
+        <Contact />
+      </motion.main>
+
+      <Footer />
+    </div>
   )
 }
 

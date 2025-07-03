@@ -1,110 +1,152 @@
-import { Code, Brain, Users, Lightbulb } from "lucide-react"
+"use client"
 
-export default function About() {
+import { motion } from "framer-motion"
+import { Code, Brain, Users, Zap } from "lucide-react"
+
+const About = () => {
   const skills = [
-    "React",
-    "Node.js",
-    "TypeScript",
-    "Python",
-    "MongoDB",
-    "PostgreSQL",
-    "AWS",
-    "Docker",
-    "Kubernetes",
-    "Tailwind CSS",
-    "Next.js",
-    "Express.js",
-    "LangChain",
-    "TensorFlow",
-    "PyTorch",
-    "Redis",
-    "GraphQL",
-    "REST APIs",
+    { name: "React", level: 90 },
+    { name: "Node.js", level: 95 },
+    { name: "JavaScript", level: 88 },
+    { name: "Python", level: 85 },
+    { name: "SQL", level: 82 },
+    { name: "AWS", level: 60 },
+    { name: "LangChain", level: 75 },
+    { name: "Tailwind CSS", level: 92 },
+    { name: "Prompt Engg", level: 72 },
   ]
 
   const traits = [
     {
-      icon: <Code className="w-8 h-8" />,
+      icon: Code,
       title: "Technical Excellence",
-      description: "Passionate about clean code, scalable architecture, and cutting-edge technologies.",
+      description: "Passionate about clean code, best practices, and continuous learning",
     },
     {
-      icon: <Brain className="w-8 h-8" />,
+      icon: Brain,
       title: "AI Innovation",
-      description: "Leveraging artificial intelligence to solve complex problems and enhance user experiences.",
+      description: "Exploring the frontiers of AI and machine learning applications",
     },
     {
-      icon: <Users className="w-8 h-8" />,
-      title: "Team Collaboration",
-      description: "Strong believer in agile methodologies and cross-functional team collaboration.",
+      icon: Users,
+      title: "Collaboration",
+      description: "Strong believer in teamwork and knowledge sharing",
     },
     {
-      icon: <Lightbulb className="w-8 h-8" />,
+      icon: Zap,
       title: "Problem Solving",
-      description: "Analytical mindset with a knack for breaking down complex challenges into manageable solutions.",
+      description: "Turning complex challenges into elegant solutions",
     },
   ]
 
   return (
-    <section id="about" className="py-20 bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">About Me</h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
-        </div>
+    <section id="about" className="py-16 lg:py-32 section-padding section-bg-gradient">
+      <div className="container-width relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+            About <span className="text-gradient">Me</span>
+          </h2>
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto px-4 lg:px-0">
+            Passionate developer with a curiosity-driven approach to technology and innovation
+          </p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Left: Story */}
-          <div className="space-y-6">
-            <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              I'm a passionate Full Stack Developer and AI Engineer with a love for creating innovative solutions that
-              make a real impact. My journey began with curiosity about how things work, which led me to explore the
-              fascinating world of software development and artificial intelligence.
-            </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          {/* Story Column */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="col-span-12 lg:col-span-6 space-y-6"
+          >
+            <div className="prose prose-lg dark:prose-invert ml-4">
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                I'm a Full Stack Developer and AI Engineer who believes in the power of technology to solve real-world
+                problems. With a strong foundation in modern web technologies and a growing expertise in artificial
+                intelligence, I enjoy building products that make a difference.
+              </p>
 
-            <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              With expertise spanning from frontend frameworks like React to backend technologies like Node.js and
-              Python, I enjoy building end-to-end solutions. My recent focus on AI and machine learning has opened up
-              exciting possibilities for creating intelligent applications that can learn and adapt.
-            </p>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                My journey in tech has been driven by curiosity and a passion for continuous learning. I thrive in
+                collaborative environments where I can contribute to innovative solutions while growing alongside
+                talented teams. Proven track record through freelance work, hackathons, and impactful academic projects. Passionate about building intelligent systems that solve real-world problems using both web and AI technologies.
+              </p>
+            </div>
 
-            <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-              When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or
-              sharing knowledge with the developer community. I believe in continuous learning and the power of
-              collaboration to drive innovation.
-            </p>
-          </div>
+            {/* Traits Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+              {traits.map((trait, index) => (
+                <motion.div
+                  key={trait.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="p-6 card-swiss card-gradient"
+                >
+                  <div className="relative z-10">
+                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mb-4">
+                      <trait.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <h4 className="font-semibold mb-2 text-gradient">{trait.title}</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">{trait.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
 
-          {/* Right: Traits */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {traits.map((trait, index) => (
-              <div
-                key={index}
-                className="p-6 bg-gray-50 dark:bg-gray-800 rounded-2xl hover:shadow-lg transition-shadow duration-300"
-              >
-                <div className="text-blue-600 dark:text-blue-400 mb-4">{trait.icon}</div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{trait.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{trait.description}</p>
+          {/* Skills Column */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="col-span-12 lg:col-span-6"
+          >
+            <div className="card-swiss card-gradient p-8 shadow-xl">
+              <div className="relative z-10">
+                <h3 className="text-2xl font-bold mb-8 text-center text-gradient">Technical Skills</h3>
+
+                <div className="space-y-6">
+                  {skills.map((skill, index) => (
+                    <motion.div
+                      key={skill.name}
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                    >
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="font-medium">{skill.name}</span>
+                        <span className="text-sm text-gray-500">{skill.level}%</span>
+                      </div>
+                      <div className="w-full bg-gray-200 dark:bg-dark-800 rounded-full h-2">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${skill.level}%` }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 1, delay: index * 0.1 }}
+                          className="bg-gradient-to-r from-primary-500 to-primary-600 h-2 rounded-full"
+                        />
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Skills */}
-        <div className="mt-16">
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">Technologies & Skills</h3>
-          <div className="flex flex-wrap justify-center gap-3">
-            {skills.map((skill, index) => (
-              <span
-                key={index}
-                className="px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-sm font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors duration-200"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
   )
 }
+
+export default About

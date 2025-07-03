@@ -1,71 +1,112 @@
 "use client"
 
-import { Heart } from "lucide-react"
+import { motion } from "framer-motion"
+import { Heart, Github } from "lucide-react"
 
-export default function Footer() {
+const Footer = () => {
   const currentYear = new Date().getFullYear()
 
-  const quickLinks = [
-    { name: "Home", href: "#home" },
+  const footerLinks = [
     { name: "About", href: "#about" },
     { name: "Projects", href: "#projects" },
+    { name: "Blog", href: "#blog" },
     { name: "Contact", href: "#contact" },
   ]
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
-  }
-
   return (
-    <footer className="bg-gray-900 dark:bg-gray-950 text-white py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer className="bg-dark-900 text-white py-8 lg:py-12 section-padding">
+      <div className="container-width">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
           {/* Brand */}
-          <div className="space-y-4">
-            <h3 className="text-2xl font-bold">Abhishek Adiga</h3>
-            <p className="text-gray-400 max-w-md">
-              Full Stack Developer & AI Engineer passionate about creating innovative solutions that make a real impact.
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="col-span-1 lg:col-span-6"
+          >
+            <h3 className="text-2xl font-bold text-gradient mb-4">Abhishek Adiga</h3>
+            <p className="text-gray-400 leading-relaxed max-w-md">
+              Full Stack Developer and AI Engineer passionate about creating innovative solutions that make a
+              difference.
             </p>
-          </div>
+          </motion.div>
 
           {/* Quick Links */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold">Quick Links</h4>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="col-span-1 lg:col-span-3"
+          >
+            <h4 className="font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              {quickLinks.map((link) => (
+              {footerLinks.map((link) => (
                 <li key={link.name}>
-                  <button
-                    onClick={() => scrollToSection(link.href)}
-                    className="text-gray-400 hover:text-white transition-colors duration-200"
+                  <motion.a
+                    href={link.href}
+                    whileHover={{ x: 5 }}
+                    className="text-gray-400 hover:text-white transition-colors duration-300"
                   >
                     {link.name}
-                  </button>
+                  </motion.a>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Contact Info */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold">Get in Touch</h4>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="col-span-1 lg:col-span-3"
+          >
+            <h4 className="font-semibold mb-4">Get in Touch</h4>
             <div className="space-y-2 text-gray-400">
-              <p>abhishek.adiga@example.com</p>
-              <p>+1 (555) 123-4567</p>
-              <p>San Francisco, CA</p>
+              <p>abhishekadiga265@gmail.com</p>
+              <p>+91 8106654265</p>
+              <p>Hyderabad, Telengana - 500020.</p>
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">© {currentYear} Abhishek Adiga. All rights reserved.</p>
-          <p className="text-gray-400 text-sm flex items-center mt-4 sm:mt-0">
-            Built with <Heart className="w-4 h-4 mx-1 text-red-500" /> using React & Tailwind CSS
-          </p>
-        </div>
+        {/* Bottom Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="border-t border-gray-800 mt-8 lg:mt-12 pt-6 lg:pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
+        >
+          <div className="flex items-center gap-2 text-gray-400">
+            <span>© {currentYear} Abhishek Adiga. All rights reserved.</span>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 text-gray-400">
+              <span>Built with</span>
+              <Heart size={16} className="text-red-500" />
+              <span>using React + Tailwind</span>
+            </div>
+
+            <motion.a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              className="text-gray-400 hover:text-white transition-colors duration-300"
+              aria-label="View source code"
+            >
+              <Github size={20} />
+            </motion.a>
+          </div>
+        </motion.div>
       </div>
     </footer>
   )
 }
+
+export default Footer

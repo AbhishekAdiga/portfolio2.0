@@ -71,7 +71,7 @@ export const projectsData: Project[] = [
     image: "/portfolio-img.png?height=300&width=400",
     category: "Web App",
     techStack: ["Prompt Engg", "v0", "React", "Swizz Design", "Vercel"],
-    githubUrl: "https://github.com/AbhishekAdiga/portfolio",
+    githubUrl: "https://github.com/AbhishekAdiga/portfolio2.0",
   },
   {
     id: "7",
